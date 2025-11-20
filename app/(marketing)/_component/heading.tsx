@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
@@ -14,16 +14,17 @@ const Heading = () => {
                 </span>
             </h1>
             <h3 className="text-base sm:text-xl md:text-2xl font-medium">
-                A simple, connected workspace for everything you think. <br /> Notes, tasks, ideas — all in one place.
+                A simple, connected workspace for everything you think. <br /> Notes,
+                tasks, ideas — all in one place.
             </h3>
-            <Button>
-                <Link href="/documents">
+            <Link href="/documents">
+                <Button>
                     Enter BrainFolder
-                </Link>
-                <ArrowRight className="h-4 w-4 ml-2" />
-            </Button>
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
+            </Link>
         </div>
     );
-}
+};
 
 export default Heading;
