@@ -24,7 +24,7 @@ const DocumentsPage = () => {
             <h2 className="text-lg font-medium">
                 Welcome to {user?.firstName}&apos;s BrainFolder.
             </h2>
-            <Button onClick={onCreate}>
+            <Button onClick={onCreate} className="cursor-pointer">
                 <PlusCircle className="h-4 w-4 mr-2" />
                 Create a note.
             </Button>
