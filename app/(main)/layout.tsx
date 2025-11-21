@@ -18,15 +18,16 @@ const MainLayout = ({
     const { isAuthenticated, isLoading } = useConvexAuth();
 
     if (isLoading) {
-        <div className="h-full flex justify-center items-center">
-            <Spinner size="lg" />
-        </div>
+        return (
+            <div className="h-full flex justify-center items-center">
+                <Spinner size="lg" />
+            </div>
+        )
     }
 
     if (!isAuthenticated) {
         return redirect("/");
     }
-
 
     return (
         <div className="h-full flex dark:bg-[#1F1F1F]">
