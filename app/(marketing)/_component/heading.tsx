@@ -21,38 +21,35 @@ const Heading = () => {
                 A simple, connected workspace for everything you think. <br /> Notes,
                 tasks, ideas — all in one place.
             </h3>
-            <Link href="/documents">
-
-                <div className="justify-center mt-4 w-full flex items-center ">
-                    {/* Loading placeholder area -- prevents layout shift */}
-                    <div className="w-6 h-6 flex items-center justify-center">
-                        {isLoading && <Spinner size="sm" />}
-                    </div>
-
-                    {/* Unauthenticated */}
-                    {!isAuthenticated && !isLoading && (
-                        <>
-                            <SignInButton mode="modal">
-                                <Button size="sm" className="cursor-pointer">
-                                    Get BrainFolder free
-                                </Button>
-                            </SignInButton>
-                        </>
-                    )}
-
-                    {/* Authenticated */}
-                    {isAuthenticated && !isLoading && (
-                        <>
-                            <Button size="sm" className="cursor-pointer" asChild>
-                                <Link href="/documents">
-                                    Enter BrainFolder
-                                    <ArrowRight className="h-4 w-4 ml-2" />
-                                </Link>
-                            </Button>
-                        </>
-                    )}
+            <div className="justify-center mt-4 w-full flex items-center ">
+                {/* Loading placeholder area -- prevents layout shift */}
+                <div className="w-6 h-6 flex items-center justify-center">
+                    {isLoading && <Spinner size="sm" />}
                 </div>
-            </Link>
+
+                {/* Unauthenticated */}
+                {!isAuthenticated && !isLoading && (
+                    <>
+                        <SignInButton mode="modal">
+                            <Button size="sm" className="cursor-pointer">
+                                Get BrainFolder free
+                            </Button>
+                        </SignInButton>
+                    </>
+                )}
+
+                {/* Authenticated */}
+                {isAuthenticated && !isLoading && (
+                    <>
+                        <Button size="sm" className="cursor-pointer" asChild>
+                            <Link href="/documents">
+                                Enter BrainFolder
+                                <ArrowRight className="h-4 w-4 ml-2" />
+                            </Link>
+                        </Button>
+                    </>
+                )}
+            </div>
         </div>
     );
 };
