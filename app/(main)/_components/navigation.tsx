@@ -12,6 +12,7 @@ import Item from "./item";
 import { toast } from "sonner";
 import { DocumentList } from "./document-list";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import TrashBox from "./trash-box";
 
 
 const Naviagtion = () => {
@@ -24,6 +25,7 @@ const Naviagtion = () => {
     const navbarRef = useRef<ElementRef<"div">>(null);
     const [isResetting, setIsResetting] = useState(false);
     const [isCollapsable, setIsCollapsable] = useState(isMobile);
+
 
 
     const create = useMutation(api.documents.create);
@@ -172,7 +174,7 @@ const Naviagtion = () => {
                             className="p-0 w-72"
                             side={isMobile ? "bottom" : "right"}
                         >
-                            <p>Trash Box</p>
+                            <TrashBox />
                         </PopoverContent>
                     </Popover>
 
