@@ -13,6 +13,7 @@ import { toast } from "sonner";
 import { DocumentList } from "./document-list";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import TrashBox from "./trash-box";
+import { useSearch } from "@/hooks/use-search";
 
 
 const Naviagtion = () => {
@@ -25,6 +26,7 @@ const Naviagtion = () => {
     const navbarRef = useRef<ElementRef<"div">>(null);
     const [isResetting, setIsResetting] = useState(false);
     const [isCollapsable, setIsCollapsable] = useState(isMobile);
+    const search = useSearch();
 
 
 
@@ -124,6 +126,7 @@ const Naviagtion = () => {
     }
 
 
+
     return (
         <>
             <aside ref={sidebarRef} className={cn(
@@ -147,7 +150,7 @@ const Naviagtion = () => {
                         label="Search"
                         icon={Search}
                         isSearch
-                        onClick={() => { }}
+                        onClick={search.onOpen}
                     />
                     <Item
                         label="Setting"
