@@ -14,6 +14,7 @@ import { DocumentList } from "./document-list";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import TrashBox from "./trash-box";
 import { useSearch } from "@/hooks/use-search";
+import { useSettings } from "@/hooks/use-settings";
 
 
 const Naviagtion = () => {
@@ -27,6 +28,7 @@ const Naviagtion = () => {
     const [isResetting, setIsResetting] = useState(false);
     const [isCollapsable, setIsCollapsable] = useState(isMobile);
     const search = useSearch();
+    const settings = useSettings();
 
 
 
@@ -155,7 +157,7 @@ const Naviagtion = () => {
                     <Item
                         label="Setting"
                         icon={Settings}
-                        onClick={() => { }}
+                        onClick={settings.onOpen}
                     />
                     <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
                 </div>
