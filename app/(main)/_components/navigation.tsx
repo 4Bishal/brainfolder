@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { ChevronsLeft, MenuIcon, Plus, PlusCircle, Search, Settings, Trash } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import UserItem from "./user-item";
@@ -15,18 +15,20 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import TrashBox from "./trash-box";
 import { useSearch } from "@/hooks/use-search";
 import { useSettings } from "@/hooks/use-settings";
+import { Navbar } from "./navbar";
 
 
 const Naviagtion = () => {
     const pathname = usePathname();
     const isMobile = useMediaQuery("(max-width:768px)");
+    const params = useParams();
 
 
     const isResizinRef = useRef(false);
     const sidebarRef = useRef<ElementRef<"aside">>(null);
     const navbarRef = useRef<ElementRef<"div">>(null);
     const [isResetting, setIsResetting] = useState(false);
-    const [isCollapsable, setIsCollapsable] = useState(isMobile);
+    const [isCollapsed, setIsCollapsed] = useState(isMobile);
     const search = useSearch();
     const settings = useSettings();
 
@@ -87,7 +89,7 @@ const Naviagtion = () => {
 
     const resetWidth = () => {
         if (sidebarRef.current && navbarRef.current) {
-            setIsCollapsable(false);
+            setIsCollapsed(false);
             setIsResetting(true);
 
             sidebarRef.current.style.width = isMobile ? "100%" : "240px";
@@ -103,7 +105,7 @@ const Naviagtion = () => {
 
     const collapse = () => {
         if (sidebarRef.current && navbarRef.current) {
-            setIsCollapsable(true);
+            setIsCollapsed(true);
             setIsResetting(false);
 
             sidebarRef.current.style.width = "0";
@@ -197,9 +199,23 @@ const Naviagtion = () => {
                     isMobile && "left-0 w-full"
                 )}
             >
-                <nav className="bg-transparent px-3 py-2 w-full">
-                    {isCollapsable && <MenuIcon role="button" onClick={resetWidth} className="h-6 w-6 text-muted-foreground" />}
-                </nav>
+
+                {
+                    !!params.documentId
+                        ?
+                        <Navbar
+                            isCollapsed={isCollapsed}
+                            onResetWidth={resetWidth}
+                        />
+                        :
+                        (
+                            <nav className="bg-transparent px-3 py-2 w-full">
+                                {isCollapsed && <MenuIcon role="button" onClick={resetWidth} className="h-6 w-6 text-muted-foreground" />}
+                            </nav>
+                        )
+
+                }
+
             </div>
         </>
     );
