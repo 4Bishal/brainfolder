@@ -24,7 +24,7 @@ export const Navbar = (
     const params = useParams();
 
     const document = useQuery(api.documents.getById, {
-        documnetId: params.documentId as Id<"documents">
+        documentId: params.documentId as Id<"documents">
     })
 
     if (document === undefined) {

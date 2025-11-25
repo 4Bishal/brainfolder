@@ -6,5 +6,5 @@ export default {
       domain: "https://gorgeous-mastodon-53.clerk.accounts.dev",
       applicationID: "convex",
     },
-  ]
+  ],
 } satisfies AuthConfig;

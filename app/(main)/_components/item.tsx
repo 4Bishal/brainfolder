@@ -55,6 +55,7 @@ const Item = ({
             success: "Note moved to trash!",
             error: "Failed to archive note."
         });
+        router.push("/documents")
     }
 
     const handleExpand = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -71,7 +72,7 @@ const Item = ({
                     onExpand?.();
                 }
 
-                //  router.push(`/documents/${documentId}`);
+                router.push(`/documents/${documentId}`);
 
                 toast.promise(promise, {
                     loading: "Creating a note..",

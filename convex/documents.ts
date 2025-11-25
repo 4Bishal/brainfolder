@@ -245,12 +245,12 @@ export const getSearch = query({
 
 export const getById = query({
   args: {
-    documnetId: v.id("documents"),
+    documentId: v.id("documents"),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
 
-    const document = await ctx.db.get(args.documnetId);
+    const document = await ctx.db.get(args.documentId);
 
     if (!document) {
       throw new Error("Not Found!");
@@ -281,6 +281,7 @@ export const update = mutation({
     content: v.optional(v.string()),
     coverImage: v.optional(v.string()),
     isPublished: v.optional(v.boolean()),
+    icon: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -305,6 +306,35 @@ export const update = mutation({
 
     const document = await ctx.db.patch(args.id, {
       ...rest,
+    });
+
+    return document;
+  },
+});
+
+export const removeIcon = mutation({
+  args: {
+    id: v.id("documents"),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error("Not Authenticated");
+    }
+    const userId = identity.subject;
+
+    const existDocument = await ctx.db.get(args.id);
+    if (!existDocument) {
+      throw new Error("Not Found");
+    }
+
+    if (existDocument.userId !== userId) {
+      throw new Error("Unauthorised");
+    }
+
+    const document = await ctx.db.patch(args.id, {
+      icon: undefined,
     });
 
     return document;

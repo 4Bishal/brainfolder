@@ -1,9 +1,43 @@
-const DocumentId = () => {
+"use client"
+
+import Toolbar from "@/app/(main)/_components/toolbar";
+import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
+import { useQuery } from "convex/react";
+import { useParams } from "next/navigation";
+
+const DocumentIdPage = (
+) => {
+
+    const params = useParams();
+    const document = useQuery(api.documents.getById, {
+        documentId: params.documentId as Id<"documents">
+    });
+
+    if (document === undefined) {
+        return (
+            <div>
+                Loading...
+            </div>
+        )
+    }
+
+    if (document === null) {
+        return (
+            <div>
+                Not Found!
+            </div>
+        );
+    }
+
     return (
-        <p>
-            DocumentId
-        </p>
+        <div className="pb-40">
+            <div className="h-[45vh]" />
+            <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
+                <Toolbar initialData={document} />
+            </div>
+        </div>
     );
 }
 
-export default DocumentId;
+export default DocumentIdPage;
