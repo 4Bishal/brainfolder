@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "@/lib/utils";
-import { ChevronsLeft, MenuIcon, Plus, PlusCircle, Search, Settings, Trash } from "lucide-react";
+import { ChevronsLeft, Home, MenuIcon, Plus, PlusCircle, Search, Settings, Trash } from "lucide-react";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
@@ -16,6 +16,8 @@ import TrashBox from "./trash-box";
 import { useSearch } from "@/hooks/use-search";
 import { useSettings } from "@/hooks/use-settings";
 import { Navbar } from "./navbar";
+import { SidebarFooter } from "./sidebarfooter";
+
 
 
 const Naviagtion = () => {
@@ -164,11 +166,6 @@ const Naviagtion = () => {
                         isSearch
                         onClick={search.onOpen}
                     />
-                    <Item
-                        label="Setting"
-                        icon={Settings}
-                        onClick={settings.onOpen}
-                    />
                     <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
                 </div>
                 <div className="mt-4">
@@ -198,6 +195,7 @@ const Naviagtion = () => {
                     onMouseDown={handleMouseDown}
                     onClick={resetWidth}
                     className="opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0" />
+                <SidebarFooter />
             </aside>
             <div
                 ref={navbarRef}
@@ -223,7 +221,6 @@ const Naviagtion = () => {
                         )
 
                 }
-
             </div>
         </>
     );

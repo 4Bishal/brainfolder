@@ -9,6 +9,7 @@ import { useMutation, useQuery } from "convex/react";
 import { useParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import { useMemo } from "react";
+import ErrorPage from "@/app/error";
 
 const DocumentIdPage = (
 ) => {
@@ -39,9 +40,7 @@ const DocumentIdPage = (
 
     if (document === null) {
         return (
-            <div>
-                Not Found!
-            </div>
+            <ErrorPage />
         );
     }
 
