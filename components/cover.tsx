@@ -52,7 +52,7 @@ const Cover = ({ url, preview }: CoverImageProps) => {
                         src={url}
                         fill
                         alt="Cover"
-                        className="object-cover"
+                        className="w-full h-full object-cover object-center"
                     />
                 )
             }
