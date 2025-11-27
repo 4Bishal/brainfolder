@@ -33,19 +33,18 @@ export const archive = mutation({
         .collect();
 
       for (const child of children) {
+        await recursiveArchive(child._id);
         await ctx.db.patch(child._id, {
           isArchived: true,
         });
-
-        await recursiveArchive(child._id);
       }
     };
+
+    await recursiveArchive(args.id);
 
     const document = await ctx.db.patch(args.id, {
       isArchived: true,
     });
-
-    await recursiveArchive(args.id);
 
     return document;
   },
@@ -109,6 +108,7 @@ export const getTrash = query({
     if (!identity) {
       throw new Error("Not Authenticated");
     }
+
     const userId = identity.subject;
 
     const documents = await ctx.db

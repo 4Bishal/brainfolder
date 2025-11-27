@@ -147,10 +147,43 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
                         />
                     ) : (
                         // Upload Icon
-                        <div className="flex flex-col items-center justify-center text-xs text-gray-400">
-                            <UploadCloudIcon className="mb-2 h-7 w-7" />
-                            <div className="text-gray-400">
-                                Click or drag file to this areea to upload
+                        <div className="flex flex-col items-center justify-center text-center space-y-4 px-6">
+                            <div className="p-4 rounded-full bg-blue-50 dark:bg-blue-950/30">
+                                <UploadCloudIcon className="h-10 w-10 text-blue-600 dark:text-blue-400" />
+                            </div>
+
+                            <div className="space-y-2">
+                                <div className="text-base font-semibold text-gray-700 dark:text-gray-200">
+                                    Upload Cover Image
+                                </div>
+                                <div className="text-sm text-gray-500 dark:text-gray-400">
+                                    Click or drag file to this area to upload
+                                </div>
+                            </div>
+
+                            <div className="w-full max-w-md p-4 rounded-lg border-2 border-dashed border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20 mb-4">
+                                <div className="space-y-2">
+                                    <div className="flex items-center justify-center gap-2 text-sm font-semibold text-blue-700 dark:text-blue-300">
+                                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                                        </svg>
+                                        Recommended Specifications
+                                    </div>
+                                    <div className="text-xs space-y-1.5">
+                                        <div className="flex items-center justify-center gap-2 text-gray-700 dark:text-gray-300">
+                                            <span className="inline-flex items-center px-2 py-1 rounded bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 font-medium">
+                                                1920 × 1080px
+                                            </span>
+                                            <span className="text-gray-500">or</span>
+                                            <span className="inline-flex items-center px-2 py-1 rounded bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 font-medium">
+                                                16:9 ratio
+                                            </span>
+                                        </div>
+                                        <div className="text-gray-600 dark:text-gray-400 pt-1">
+                                            JPG, PNG, WebP • Max 10MB
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     )}

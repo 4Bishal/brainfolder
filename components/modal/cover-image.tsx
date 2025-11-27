@@ -4,7 +4,7 @@ import { useCoverImage } from "@/hooks/user-coverimage"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { useEdgeStore } from "@/lib/edgestore";
 import { useState } from "react";
-import { useMutation } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useParams } from "next/navigation";
 import { Id } from "@/convex/_generated/dataModel";

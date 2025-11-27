@@ -1,13 +1,13 @@
 import { create } from "zustand"
 
-type SettingStore = {
+type TrashProps = {
     isOpen: boolean,
     onOpen: () => void
     onClose: () => void
 };
 
 
-export const useSettings = create<SettingStore>((set) => ({
+export const useTrashBox = create<TrashProps>((set) => ({
     isOpen: false,
     onOpen: () => set({ isOpen: true }),
     onClose: () => set({ isOpen: false })

@@ -10,9 +10,9 @@ import { useParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import { useMemo } from "react";
 import ErrorPage from "@/app/error";
+import { AlertCircle } from "lucide-react";
 
-const DocumentIdPage = (
-) => {
+const DocumentIdPage = () => {
 
     const Editor = useMemo(() => dynamic(() => import("@/components/editor"), { ssr: false }), []);
 
@@ -57,9 +57,18 @@ const DocumentIdPage = (
             <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
                 <Toolbar initialData={document} />
                 <Editor
+                    editable={!document.isArchived}
                     onChange={onChange}
                     initialContent={document.content}
                 />
+                {document.isArchived && (
+                    <div className="flex items-center justify-center gap-2 mt-8 p-4 bg-muted/50 rounded-lg border border-muted-foreground/20">
+                        <AlertCircle className="h-5 w-5 text-muted-foreground" />
+                        <p className="text-sm text-muted-foreground font-medium">
+                            Restore the page to edit this note
+                        </p>
+                    </div>
+                )}
             </div>
         </div>
     );

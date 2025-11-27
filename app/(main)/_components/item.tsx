@@ -11,6 +11,7 @@ import { useMutation } from "convex/react";
 import { ChevronDown, ChevronRight, LucideIcon, MoreHorizontal, Plus, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useMediaQuery } from "usehooks-ts";
 
 interface ItemProps {
     id?: Id<"documents">,
@@ -42,6 +43,7 @@ const Item = ({
     const router = useRouter();
     const { user } = useUser();
     const archive = useMutation(api.documents.archive);
+    const isMobile = useMediaQuery("(max-width:768px)");
 
     const onArchive = (
         event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -141,7 +143,12 @@ const Item = ({
                             >
                                 <div
                                     role="button"
-                                    className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:neutral:600 ">
+                                    className={
+                                        cn(
+                                            "opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600",
+                                            isMobile && "opacity-100"
+                                        )
+                                    }>
                                     <MoreHorizontal className="h-4 w-4 text-muted-foreground" />
                                 </div>
                             </DropdownMenuTrigger>
@@ -161,7 +168,11 @@ const Item = ({
                                 </div>
                             </DropdownMenuContent>
                         </DropdownMenu>
-                        <div className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600">
+                        <div className={cn(
+                            "opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600",
+                            isMobile && "opacity-100"
+                        )}
+                        >
                             <Plus className="h-4 w-4 text-muted-foreground" />
                         </div>
                     </div>

@@ -6,6 +6,7 @@ import ConvexClientProvider from "@/components/providers/convex-providers";
 import { Toaster } from "sonner";
 import { ModalProvider } from "@/components/providers/modal-providers";
 import { EdgeStoreProvider } from "@/lib/edgestore";
+import { SonnerToaster } from "@/components/providers/toaster-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +28,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -42,7 +44,7 @@ export default function RootLayout({
               disableTransitionOnChange
               storageKey="BrainFolder-Theme"
             >
-              <Toaster position="bottom-center" />
+              <SonnerToaster />
               <ModalProvider />
               {children}
             </ThemeProvider>
