@@ -44,12 +44,13 @@ const Cover = ({ url, preview }: CoverImageProps) => {
 
     return (
         <div className={cn(
-            "relative w-full group",
+            "relative w-full group ",
             !url && isMobile && "h-[20vh]",
             !url && !isMobile && "h-[25vh]",
             url && isMobile && "h-[30vh]",
             url && !isMobile && "h-[35vh]",
-            url && "bg-muted overflow-hidden"
+            url && "bg-muted overflow-hidden",
+            !preview && "mt-15"
         )}>
             {
                 !!url ? (

@@ -369,3 +369,28 @@ export const removeCoverImage = mutation({
     return document;
   },
 });
+
+export const removeAll = mutation({
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error("Not Authenticated");
+    }
+    const userId = identity.subject;
+
+    // Get all archived documents for the user
+    const archivedDocuments = await ctx.db
+      .query("documents")
+      .withIndex("by_user", (q) => q.eq("userId", userId))
+      .filter((q) => q.eq(q.field("isArchived"), true))
+      .collect();
+
+    // Delete all archived documents
+    for (const document of archivedDocuments) {
+      await ctx.db.delete(document._id);
+    }
+
+    return { count: archivedDocuments.length };
+  },
+});

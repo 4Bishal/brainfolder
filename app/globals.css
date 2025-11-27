@@ -132,3 +132,25 @@ body,
     transform: rotate(360deg);
   }
 }
+
+/* Fix BlockNote file block hover and selected state in dark mode */
+.dark
+  .bn-editor[contenteditable="true"]
+  [data-file-block]
+  .bn-add-file-button:hover,
+.dark [data-file-block] .bn-file-name-with-icon:hover,
+.dark .ProseMirror-selectednode .bn-file-name-with-icon {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Ensure text is visible */
+.dark [data-file-block] .bn-file-name-with-icon:hover .bn-file-name,
+.dark .ProseMirror-selectednode .bn-file-name {
+  color: #ffffff !important;
+}
+
+/* Fix icon color too */
+.dark [data-file-block] .bn-file-name-with-icon:hover svg,
+.dark .ProseMirror-selectednode .bn-file-icon svg {
+  color: #ffffff !important;
+}

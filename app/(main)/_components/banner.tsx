@@ -100,7 +100,6 @@ const Banner = (
                                 Delete Forever
                             </Button>
                         </ConfirmModal>
-
                     </div>
 
                 </div>

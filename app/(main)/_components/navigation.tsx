@@ -132,6 +132,12 @@ const Navigation = () => {
         else resetWidth();
     }, [isMobile]);
 
+
+    useEffect(() => {
+        if (isMobile) collapse();
+        else resetWidth();
+    }, [isMobile, pathname]);
+
     return (
         <>
             <aside

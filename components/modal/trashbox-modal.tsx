@@ -13,6 +13,7 @@ import { Search, Trash, Undo, FileText, Trash2 } from "lucide-react";
 import { Input } from "../ui/input";
 import { ConfirmModal } from "./confirm-modal";
 import { useMediaQuery } from "usehooks-ts";
+import { Button } from "@/components/ui/button";
 
 export const TrashBoxModal = () => {
     const trash = useTrashBox();
@@ -21,6 +22,7 @@ export const TrashBoxModal = () => {
     const documents = useQuery(api.documents.getTrash, trash.isOpen && isAuthenticated ? {} : "skip");
     const restore = useMutation(api.documents.restore);
     const remove = useMutation(api.documents.remove);
+    const removeAll = useMutation(api.documents.removeAll);
 
     const [search, setSearch] = useState("");
 
@@ -61,6 +63,19 @@ export const TrashBoxModal = () => {
         });
 
         router.push("/documents");
+
+    };
+
+    const onRemoveAll = () => {
+        const promise = removeAll();
+
+        toast.promise(promise, {
+            loading: "Deleting all notes...",
+            success: "All notes deleted!",
+            error: "Failed to delete notes."
+        });
+        trash.onClose();
+        router.push("/documents");
     };
 
     if (!trash.isOpen) {
@@ -78,7 +93,7 @@ export const TrashBoxModal = () => {
                         <div className="p-2 rounded-lg bg-destructive/10">
                             <Trash2 className="h-5 w-5 text-destructive" />
                         </div>
-                        <div>
+                        <div className="flex-1">
                             <DialogTitle className="text-xl font-semibold">
                                 Trash
                             </DialogTitle>
@@ -86,6 +101,18 @@ export const TrashBoxModal = () => {
                                 {filterDocuments?.length || 0} {filterDocuments?.length === 1 ? 'item' : 'items'} in trash
                             </p>
                         </div>
+                        {documents && documents.length > 0 && (
+                            <ConfirmModal onConfirm={onRemoveAll}>
+                                <Button
+                                    variant="destructive"
+                                    size="sm"
+                                    className="gap-2 mr-8"
+                                >
+                                    <Trash2 className="h-4 w-4" />
+                                    Delete All
+                                </Button>
+                            </ConfirmModal>
+                        )}
                     </div>
                 </DialogHeader>
 
