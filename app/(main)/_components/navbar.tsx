@@ -1,5 +1,3 @@
-"use effect"
-
 import { api } from "@/convex/_generated/api"
 import { Id } from "@/convex/_generated/dataModel"
 import { useQuery } from "convex/react"
@@ -48,28 +46,26 @@ export const Navbar = (
         <>
             {
                 !document.isArchived && (
-                    <nav className="bg-background dark:bg-[#1F1F1F] px-3 py-2 w-full flex items-center gap-x-4">
-                        {
-                            isCollapsed && (
-                                <MenuIcon
-                                    role="button"
-                                    onClick={onResetWidth}
-                                    className="h-6 w-6 text-muted-foreground cursor-pointer"
-                                />
-                            )
-                        }
+                    <nav className="bg-background dark:bg-[#1F1F1F] px-3 py-2 w-full">
+                        <div className="flex items-center gap-x-2 md:gap-x-4 max-w-full">
+                            {
+                                isCollapsed && (
+                                    <MenuIcon
+                                        role="button"
+                                        onClick={onResetWidth}
+                                        className="h-6 w-6 text-muted-foreground cursor-pointer flex-shrink-0"
+                                    />
+                                )
+                            }
 
-                        <div className="flex items-center justify-between w-full ">
-                            <Title initialData={document} />
-
-                            <div className="flex items-center gap-x-2">
-                                <Publish initialData={document} />
-                                <Menu documentId={document._id} />
-
+                            <div className="flex-1 min-w-0 overflow-hidden">
+                                <Title initialData={document} />
                             </div>
 
-
-
+                            <div className="flex items-center gap-x-1 sm:gap-x-2 flex-shrink-0">
+                                <Publish initialData={document} />
+                                <Menu documentId={document._id} />
+                            </div>
                         </div>
                     </nav>
                 )
@@ -105,11 +101,7 @@ export const Navbar = (
                         <Banner documentId={document._id} />
                     </div>
                 </nav>
-
-
-
             )}
-
         </>
     )
 }

@@ -12,6 +12,8 @@ import { ChevronDown, ChevronRight, LucideIcon, MoreHorizontal, Plus, Trash } fr
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useMediaQuery } from "usehooks-ts";
+import { TemplateType } from "@/lib/templates/types";
+import { getTemplateContent } from "@/lib/templates/generators";
 
 interface ItemProps {
     id?: Id<"documents">,
@@ -65,10 +67,17 @@ const Item = ({
         onExpand?.();
     }
 
-    const onCreate = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const onCreate = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, type: TemplateType = "blank") => {
         event.stopPropagation();
         if (!id) return;
-        const promise = create({ title: "Untitled", parentDocument: id })
+
+        const template = getTemplateContent(type);
+        const promise = create({
+            title: template.title,
+            content: template.content,
+            icon: template.icon,
+            parentDocument: id
+        })
             .then((documentId) => {
                 if (!expanded) {
                     onExpand?.();

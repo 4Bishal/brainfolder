@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-providers";
 import ConvexClientProvider from "@/components/providers/convex-providers";
-import { Toaster } from "sonner";
 import { ModalProvider } from "@/components/providers/modal-providers";
 import { EdgeStoreProvider } from "@/lib/edgestore";
 import { SonnerToaster } from "@/components/providers/toaster-provider";

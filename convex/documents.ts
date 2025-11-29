@@ -79,6 +79,8 @@ export const create = mutation({
   args: {
     title: v.string(),
     parentDocument: v.optional(v.id("documents")),
+    content: v.optional(v.string()),
+    icon: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -95,6 +97,8 @@ export const create = mutation({
       userId,
       isArchived: false,
       isPublished: false,
+      content: args.content,
+      icon: args.icon,
     });
 
     return documents;

@@ -31,6 +31,10 @@ const Cover = ({ url, preview }: CoverImageProps) => {
     })
     const isMobile = useMediaQuery("(max-width:768px)");
 
+    // Default cover image path
+    const defaultCoverImage = "/CoverImageDefault.png";
+    const displayUrl = url || defaultCoverImage;
+
     const onRemove = async () => {
         if (url) {
             await edgestore.publicFiles.delete({
@@ -46,45 +50,32 @@ const Cover = ({ url, preview }: CoverImageProps) => {
         <div className={cn(
             "relative w-full group ",
             !url && isMobile && "h-[20vh]",
-            !url && !isMobile && "h-[25vh]",
+            !url && !isMobile && "h-[20vh]",
             url && isMobile && "h-[30vh]",
             url && !isMobile && "h-[35vh]",
-            url && "bg-muted overflow-hidden",
+            "bg-muted overflow-hidden",
             !preview && "mt-15"
         )}>
+            <div className="relative w-full h-full">
+                <Image
+                    src={displayUrl}
+                    fill
+                    alt="Cover"
+                    className="object-cover"
+                    priority
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+                    quality={90}
+                />
+                {/* Overlay gradient for better button visibility */}
+                <div className={cn(
+                    "absolute inset-0 pointer-events-none",
+                    isMobile
+                        ? "bg-gradient-to-b from-black/20 via-transparent to-transparent"
+                        : "bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+                )} />
+            </div>
             {
-                !!url ? (
-                    <div className="relative w-full h-full">
-                        <Image
-                            src={url}
-                            fill
-                            alt="Cover"
-                            className="object-cover"
-                            priority
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
-                            quality={90}
-                        />
-                        {/* Overlay gradient for better button visibility */}
-                        <div className={cn(
-                            "absolute inset-0 pointer-events-none",
-                            isMobile
-                                ? "bg-gradient-to-b from-black/20 via-transparent to-transparent"
-                                : "bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
-                        )} />
-                    </div>
-                ) : (
-                    !preview && (
-                        <div className="w-full h-full bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-600 dark:to-neutral-700 flex items-center justify-center">
-                            <div className="flex flex-col items-center gap-2 text-muted-foreground">
-                                <ImageIcon className="h-12 w-12 opacity-20" />
-                                <p className="text-sm opacity-50">No cover image</p>
-                            </div>
-                        </div>
-                    )
-                )
-            }
-            {
-                url && !preview && (
+                !preview && (
                     <div className={cn(
                         "absolute flex items-center gap-x-2 z-10",
                         isMobile
@@ -92,7 +83,7 @@ const Cover = ({ url, preview }: CoverImageProps) => {
                             : "bottom-5 right-5 opacity-0 group-hover:opacity-100"
                     )}>
                         <Button
-                            onClick={document?.isArchived ? () => toast.warning("Restore page to do this action") : () => { coverImage.onReplace(url) }}
+                            onClick={document?.isArchived ? () => toast.warning("Restore page to do this action") : () => { coverImage.onReplace(url || defaultCoverImage) }}
                             className={cn(
                                 "font-medium backdrop-blur-md shadow-xl transition-all border bg-black/60 hover:bg-black/80 dark:bg-white/70 dark:hover:bg-white/90 text-white dark:text-black border-white/20 dark:border-black/20",
                                 isMobile
@@ -106,21 +97,23 @@ const Cover = ({ url, preview }: CoverImageProps) => {
                             )} />
                             {!isMobile && <span className="ml-2">Change Cover</span>}
                         </Button>
-                        <Button
-                            onClick={document?.isArchived ? () => toast.warning("Restore page to do this action") : onRemove}
-                            className={cn(
-                                "font-medium backdrop-blur-md shadow-xl transition-all border bg-red-600/70 hover:bg-red-600/90 dark:bg-red-500/70 dark:hover:bg-red-500/90 text-white border-white/20 dark:border-red-300/20",
-                                isMobile
-                                    ? "rounded-full w-11 h-11 p-0 flex items-center justify-center"
-                                    : "text-xs"
-                            )}
-                            size={isMobile ? "icon" : "sm"}
-                        >
-                            <X className={cn(
-                                isMobile ? "h-5 w-5" : "h-4 w-4 mr-2"
-                            )} />
-                            {!isMobile && <span className="ml-2">Remove</span>}
-                        </Button>
+                        {url && (
+                            <Button
+                                onClick={document?.isArchived ? () => toast.warning("Restore page to do this action") : onRemove}
+                                className={cn(
+                                    "font-medium backdrop-blur-md shadow-xl transition-all border bg-red-600/70 hover:bg-red-600/90 dark:bg-red-500/70 dark:hover:bg-red-500/90 text-white border-white/20 dark:border-red-300/20",
+                                    isMobile
+                                        ? "rounded-full w-11 h-11 p-0 flex items-center justify-center"
+                                        : "text-xs"
+                                )}
+                                size={isMobile ? "icon" : "sm"}
+                            >
+                                <X className={cn(
+                                    isMobile ? "h-5 w-5" : "h-4 w-4 mr-2"
+                                )} />
+                                {!isMobile && <span className="ml-2">Remove</span>}
+                            </Button>
+                        )}
                     </div>
                 )
             }

@@ -60,18 +60,15 @@ const Editor: React.FC<EditorProps> = ({
 
     const { resolvedTheme } = useTheme();
     return (
-        <BlockNoteView
-            editor={editor}
-            editable={editable}
-            theme={(resolvedTheme === "dark") ? "dark" : "light"}
-            onChange={(editor) => onChange(JSON.stringify(editor.topLevelBlocks, null, 2))}
-        />
+        <div className="w-full max-w-full">
+            <BlockNoteView
+                editor={editor}
+                editable={editable}
+                theme={(resolvedTheme === "dark") ? "dark" : "light"}
+                onChange={(editor) => onChange(JSON.stringify(editor.topLevelBlocks, null, 2))}
+            />
+        </div>
     )
 }
 
 export default Editor
-
-
-
-
-

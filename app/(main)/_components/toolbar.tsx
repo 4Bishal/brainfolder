@@ -82,14 +82,14 @@ const Toolbar = (
     }
 
     return (
-        <div className="pl-[54px] group relative">
+        <div className="pl-4 pr-1 sm:pl-[54px] sm:pr-0 group relative max-w-full overflow-x-hidden">
             {!!initialData.icon && !preview &&
                 (
                     <div className="flex items-center gap-x-2 group/icon pt-6">
                         <IconPicker
                             onChange={document?.isArchived ? () => toast.warning("Restore page to do this action") : onIconSelect}
                         >
-                            <p className="text-6xl hover:opacity-75 transition">
+                            <p className="text-4xl md:text-6xl hover:opacity-75 transition">
                                 {initialData.icon}
                             </p>
                         </IconPicker>
@@ -108,8 +108,7 @@ const Toolbar = (
                 )}
             {!!initialData.icon && preview &&
                 (
-                    <p
-                        className="text-6xl pt-6">
+                    <p className="text-4xl md:text-6xl pt-6">
                         {initialData.icon}
                     </p>
 
@@ -135,19 +134,6 @@ const Toolbar = (
                             </Button>
                         </IconPicker>
 
-                    )}
-                {
-                    !initialData.coverImage && !preview &&
-                    (
-                        <Button
-                            className="text-muted-foreground text-xs"
-                            variant="outline"
-                            size="sm"
-                            onClick={document?.isArchived ? () => toast.warning("Restore page to do this action") : coverImage.onOpen}
-                        >
-                            <ImageIcon className="h-4 w-4 mr-2" />
-                            Add Cover
-                        </Button>
                     )
                 }
             </div>
@@ -159,12 +145,12 @@ const Toolbar = (
                         onKeyDown={onKeyDown}
                         value={value}
                         onChange={(e) => onInput(e.target.value)}
-                        className="text-5xl bg-transparent font-bold wrap-break-word outline-none text-[#3F3F3F] dark:text-[#CFCFCF] resize-none mb-5"
+                        className="w-full text-3xl sm:text-4xl md:text-5xl bg-transparent font-bold break-words outline-none text-[#3F3F3F] dark:text-[#CFCFCF] resize-none mb-5"
                     />
                 ) : (
                     <div
                         onClick={document?.isArchived ? () => toast.warning("Restore page to do this action") : enableInput}
-                        className="text-5xl bg-transparent font-bold wrap-break-word outline-none text-[#3F3F3F] dark:text-[#CFCFCF] mb-9"
+                        className="w-full text-3xl sm:text-4xl md:text-5xl bg-transparent font-bold break-words outline-none text-[#3F3F3F] dark:text-[#CFCFCF] mb-9"
                     >
                         {initialData.title}
                     </div>
