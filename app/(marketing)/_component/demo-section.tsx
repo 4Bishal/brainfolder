@@ -30,7 +30,7 @@ const DemoSection = () => {
         "Embed images, videos, and links seamlessly",
         "Keyboard shortcuts for power users",
         "Real-time sync across all devices",
-        "Export to PDF, Markdown, or HTML"
+        "Export to PDF"
     ];
 
     return (
