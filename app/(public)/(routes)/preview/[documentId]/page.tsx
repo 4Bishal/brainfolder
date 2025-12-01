@@ -9,18 +9,16 @@ import { useMutation, useQuery } from "convex/react";
 import { useParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import { useMemo } from "react";
-import ErrorPage from "@/app/error";
+import ErrorPage from "./error";
 
-const DocumentIdPage = (
-) => {
+const DocumentIdPage = () => {
 
     const Editor = useMemo(() => dynamic(() => import("@/components/editor"), { ssr: false }), []);
 
     const params = useParams();
-    const document = useQuery(api.documents.getById, {
+    const document = useQuery(api.documents.getPublishedDocument, {
         documentId: params.documentId as Id<"documents">
     });
-    const update = useMutation(api.documents.update);
 
     if (document === undefined) {
         return (
@@ -43,14 +41,6 @@ const DocumentIdPage = (
             <ErrorPage />
         );
     }
-
-    const onChange = (content: string) => {
-        update({
-            id: document._id,
-            content
-        })
-    };
-
     return (
         <div className="pb-40 dark:bg-[#1F1F1F]">
             <Cover preview url={document.coverImage} />
@@ -58,7 +48,7 @@ const DocumentIdPage = (
                 <Toolbar preview initialData={document} />
                 <Editor
                     editable={false}
-                    onChange={onChange}
+                    onChange={() => { }}
                     initialContent={document.content}
                 />
             </div>

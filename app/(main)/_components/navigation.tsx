@@ -88,7 +88,7 @@ const Navigation = () => {
 
     // --- Create document
     const handleCreate = async () => {
-        const promise = create({ title: "Untitled" }).then((documentId) =>
+        const promise = create({ title: "Untitled", icon: "📄" }).then((documentId) =>
             router.push(`/documents/${documentId}`)
         );
         toast.promise(promise, {

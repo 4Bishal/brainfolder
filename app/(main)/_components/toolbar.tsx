@@ -88,6 +88,7 @@ const Toolbar = (
                     <div className="flex items-center gap-x-2 group/icon pt-6">
                         <IconPicker
                             onChange={document?.isArchived ? () => toast.warning("Restore page to do this action") : onIconSelect}
+                            disabled={document?.isArchived}
                         >
                             <p className="text-4xl md:text-6xl hover:opacity-75 transition">
                                 {initialData.icon}

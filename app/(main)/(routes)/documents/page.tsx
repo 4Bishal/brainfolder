@@ -115,9 +115,9 @@ export default function DocumentsPage() {
                         <TipsSection />
                     </div>
 
-                    {/* Keyboard Shortcut Hint */}
+                    {/* Keyboard Shortcut Hint  */}
                     <div className="flex items-center justify-center gap-3 text-sm text-muted-foreground pt-6 animate-in fade-in duration-700 delay-700">
-                        <div className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border/50 bg-background/50 backdrop-blur-sm">
+                        <div className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg border border-border/50 bg-background/50 backdrop-blur-sm">
                             <div className="flex items-center gap-1.5">
                                 <kbd className="px-2 py-1 text-xs font-semibold bg-muted rounded border border-border shadow-sm">
                                     <Command className="w-3 h-3" />

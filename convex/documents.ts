@@ -2,6 +2,7 @@ import { v } from "convex/values";
 
 import { mutation, query } from "./_generated/server";
 import { Doc, Id } from "./_generated/dataModel";
+import { argv } from "node:process";
 
 export const archive = mutation({
   args: {
@@ -396,5 +397,24 @@ export const removeAll = mutation({
     }
 
     return { count: archivedDocuments.length };
+  },
+});
+
+export const getPublishedDocument = query({
+  args: {
+    documentId: v.id("documents"),
+  },
+  handler: async (ctx, args) => {
+    const document = await ctx.db.get(args.documentId);
+
+    if (!document) {
+      throw new Error("Not Found");
+    }
+
+    if (!document.isPublished) {
+      throw new Error("Not Published");
+    }
+
+    return document;
   },
 });
