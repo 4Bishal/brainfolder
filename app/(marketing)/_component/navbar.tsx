@@ -9,13 +9,11 @@ import { ModeToggle } from "@/components/ui/mode-toggle";
 import Spinner from "@/components/ui/spinner";
 import { SignInButton, UserButton } from "@clerk/nextjs";
 import { useConvexAuth } from "convex/react";
-import { Menu, X } from "lucide-react";
 import { pacifico } from "../layout";
 
 const Navbar = () => {
     const { isAuthenticated, isLoading } = useConvexAuth();
     const [scrolled, setScrolled] = useState<boolean>(false);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
     const [mounted, setMounted] = useState<boolean>(false);
 
     useEffect(() => {
@@ -90,53 +88,12 @@ const Navbar = () => {
                         <ModeToggle />
                     </div>
 
-                    {/* Mobile Menu Button */}
-                    <div className="flex md:hidden items-center gap-3">
+                    {/* Mobile - Only Mode Toggle */}
+                    <div className="flex md:hidden items-center">
                         <ModeToggle />
-                        <button
-                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            className="p-2 text-neutral-700 dark:text-neutral-300"
-                            aria-label="Toggle menu"
-                        >
-                            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                        </button>
                     </div>
                 </div>
             </div>
-
-            {/* Mobile Menu */}
-            {mobileMenuOpen && (
-                <div className="md:hidden bg-white dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-800">
-                    <div className="px-4 py-6 space-y-4">
-                        {isLoading && (
-                            <div className="flex justify-center">
-                                <Spinner size="sm" />
-                            </div>
-                        )}
-
-                        {!isAuthenticated && !isLoading && (
-                            <>
-                                <SignInButton mode="modal">
-                                    <Button variant="outline" className="w-full" onClick={() => setMobileMenuOpen(false)}>
-                                        Login
-                                    </Button>
-                                </SignInButton>
-                                <SignInButton mode="modal">
-                                    <Button className="w-full" onClick={() => setMobileMenuOpen(false)}>
-                                        Get Started Free
-                                    </Button>
-                                </SignInButton>
-                            </>
-                        )}
-
-                        {isAuthenticated && !isLoading && (
-                            <Button asChild className="w-full" onClick={() => setMobileMenuOpen(false)}>
-                                <Link href="/documents">Enter BrainFolder</Link>
-                            </Button>
-                        )}
-                    </div>
-                </div>
-            )}
         </nav>
     );
 };
