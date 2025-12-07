@@ -28,8 +28,6 @@ It acts as your **second brain**, allowing you to create structured notes, neste
 BrainFolder aims to be a **clean and distraction-free knowledge engine** —  
 a digital space where ideas, research, notes, documents, and tasks stay organized and evolve naturally.
 
-The goal is to give users a **Notion-like experience** but simpler, faster, and focused entirely on knowledge management.
-
 ---
 
 ## 🛠️ Tech Stack
@@ -67,7 +65,7 @@ The goal is to give users a **Notion-like experience** but simpler, faster, and 
 - [x] Rich text editor with Markdown support  
 - [x] Nested pages & workspace structure  
 - [x] Media uploads (images/files)  
-- [x] PDF / HTML / Markdown export  
+- [x] PDF export  
 - [x] Global CMDK search  
 - [x] Dark mode  
 - [x] Templates for notes & documentation  
